@@ -1,11 +1,11 @@
-let alunos = []
+let alunos = [];
 
-exports.createAluno = async (data)=>{
-    if(!data.nome || !data.cpf || !data.plano){
-        throw new Error("Campos obrigatórios: nome, cpf, plano")
+export const createAluno = async (data) => {
+    if (!data.nome || !data.cpf || !data.plano) {
+        throw new Error("Campos obrigatórios: nome, cpf, plano");
     }
-    const novoAluno={
-        id:alunos.length+1,
+    const novoAluno = {
+        id: alunos.length + 1,
         nome: data.nome,
         cpf: data.cpf,
         plano: data.plano,
@@ -13,34 +13,34 @@ exports.createAluno = async (data)=>{
         endereco: data.endereco || null,
         ativo: data.ativo ?? true, 
         dataMatricula: data.dataMatricula || new Date()
-    }
-    alunos.push(novoAluno)
-    return novoAluno
-}
+    };
+    alunos.push(novoAluno);
+    return novoAluno;
+};
 
-exports.getAlunos= async()=>{
-    return alunos
-}
+export const getAlunos = async () => {
+    return alunos;
+};
 
-exports.getAlunosById = async (id)=>{
-    const aluno = alunos.find(a=>a.id==id)
-    if(!aluno)throw new Error("Aluno não encontrado")
-    return aluno
-}
+export const getAlunoById = async (id) => {
+    const aluno = alunos.find(a => a.id == id);
+    if (!aluno) throw new Error("Aluno não encontrado");
+    return aluno;
+};
 
-exports.updateAluno = async(id,data)=>{
-    const index = alunos.findIndex(a=>a.id==id)
-    if(index===-1)throw new Error("Aluno não encontrado")
-    alunos[index]={
-    ...alunos[index],
-    ...data
-    }
-    return alunos[index]
-}
+export const updateAluno = async (id, data) => {
+    const index = alunos.findIndex(a => a.id == id);
+    if (index === -1) throw new Error("Aluno não encontrado");
+    alunos[index] = {
+        ...alunos[index],
+        ...data
+    };
+    return alunos[index];
+};
 
-exports.deleteAluno = async(id)=>{
-    const index= alunos.findIndex(a=> a.id==id)
-    if(index===-1)throw new Error("Aluno não encontrado")
-        alunos.splice(index, 1)
-        return true
-}
+export const deleteAluno = async (id) => {
+    const index = alunos.findIndex(a => a.id == id);
+    if (index === -1) throw new Error("Aluno não encontrado");
+    alunos.splice(index, 1);
+    return true;
+};
