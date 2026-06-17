@@ -3,6 +3,7 @@ let alunos = [];
 export const createAluno = async (data) => {
     if (!data.nome || !data.cpf || !data.plano) {
         throw new Error("Campos obrigatórios: nome, cpf, plano");
+        
     }
     const novoAluno = {
         id: alunos.length + 1,
@@ -46,7 +47,12 @@ export const deleteAluno = async (id) => {
 };
 
 export const buscarEnderecoPorCep = async (cep) => {
-    const cepLimpo = cep.replace(/\D/g, '');
+    // Converter para string e limpar
+    if (!cep) {
+        throw new Error("CEP inválido");
+    }
+    
+    const cepLimpo = String(cep).replace(/\D/g, '');
     
     if (!cepLimpo || cepLimpo.length !== 8) {
         throw new Error("CEP inválido");
@@ -68,7 +74,7 @@ export const buscarEnderecoPorCep = async (cep) => {
             bairro: data.bairro,
             cidade: data.localidade,
             estado: data.uf
-        };
+        };  
     } catch (error) {
         throw new Error("CEP inválido");
     }
